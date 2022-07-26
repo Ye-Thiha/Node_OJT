@@ -1,5 +1,6 @@
+const express = require('express');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/my_db');
+mongoose.connect('mongodb+srv://Thiha:693675232@cluster0.sg54i9d.mongodb.net/test?ret ryWrites=true&w=majority');
 //const mongoose = require('mongoose');
 var app=express();
 
