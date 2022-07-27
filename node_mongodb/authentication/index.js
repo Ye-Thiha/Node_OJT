@@ -2,11 +2,13 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var upload = multer();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var path = require('path');
 
 app.set('view engine', 'pug');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
