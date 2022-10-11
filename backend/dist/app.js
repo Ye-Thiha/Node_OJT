@@ -10,6 +10,7 @@ const post_route_1 = __importDefault(require("./routes/post_route"));
 const user_route_1 = __importDefault(require("./routes/user_route"));
 const auth_route_1 = __importDefault(require("./routes/auth_route"));
 const cinema_route_1 = __importDefault(require("./routes/cinema_route"));
+const sale_route_1 = __importDefault(require("./routes/sale_route"));
 const error_1 = __importDefault(require("./middlewares/error"));
 const cors_1 = __importDefault(require("cors"));
 const multer_1 = __importDefault(require("multer"));
@@ -56,6 +57,7 @@ mongoose_1.default
     .then(() => {
     // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     app.listen(PORT, () => console.log("Server running on port " + PORT));
+    app.use('/api/sales', passport_1.default.authenticate('jwt', { session: false }), sale_route_1.default);
     app.use('/api/cinemas', passport_1.default.authenticate('jwt', { session: false }), cinema_route_1.default);
     app.use('/api/users', passport_1.default.authenticate('jwt', { session: false }), user_route_1.default);
     app.use('/api/posts', passport_1.default.authenticate('jwt', { session: false }), post_route_1.default);

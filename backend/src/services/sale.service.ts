@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Sale from '../models';
+import Sale from '../models/sale.model';
 import { validationResult } from "express-validator";
 
 /**

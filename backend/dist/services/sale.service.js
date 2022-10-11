@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findByIdService = exports.deleteSaleService = exports.updateSaleService = exports.findSaleService = exports.createSaleService = exports.getSaleService = void 0;
-const models_1 = __importDefault(require("../models"));
+const sale_model_1 = __importDefault(require("../models/sale.model"));
 const express_validator_1 = require("express-validator");
 /**
  * get post service.
@@ -32,7 +32,7 @@ const getSaleService = (_req, res, next) => __awaiter(void 0, void 0, void 0, fu
             condition.created_user_id = userId;
             condition.updated_user_id = userId;
         }
-        const sales = yield models_1.default.find(condition).skip(page * salesPerPage).limit(salesPerPage);
+        const sales = yield sale_model_1.default.find(condition).skip(page * salesPerPage).limit(salesPerPage);
         res.json({ data: sales, status: 1 });
     }
     catch (err) {
@@ -56,7 +56,7 @@ const createSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             throw error;
         }
         const saleList = req.body;
-        const result = yield models_1.default.insertMany(saleList);
+        const result = yield sale_model_1.default.insertMany(saleList);
         res
             .status(201)
             .json({ message: "Created Successfully!", data: result, status: 1 });
@@ -68,7 +68,7 @@ const createSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
 exports.createSaleService = createSaleService;
 const findSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const sale = yield models_1.default.findById(req.params.id);
+        const sale = yield sale_model_1.default.findById(req.params.id);
         if (!sale) {
             const error = Error("Not Found!");
             error.statusCode = 401;
@@ -90,7 +90,7 @@ const updateSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             error.statusCode = 401;
             throw error;
         }
-        const sale = yield models_1.default.findById(req.params.id);
+        const sale = yield sale_model_1.default.findById(req.params.id);
         if (!sale) {
             const error = new Error("Not Found!");
             error.statusCode = 404;
@@ -113,7 +113,7 @@ const updateSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
 exports.updateSaleService = updateSaleService;
 const deleteSaleService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const sale = yield models_1.default.findByIdAndRemove(req.params.id);
+        const sale = yield sale_model_1.default.findByIdAndRemove(req.params.id);
         if (!sale) {
             const error = new Error("Not Found!");
             error.statusCode = 404;
@@ -138,7 +138,7 @@ const findByIdService = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         if (userType === "User") {
             condition.created_user_id = userId;
         }
-        const sales = yield models_1.default.find(condition).skip(page * salesPerPage).limit(salesPerPage);
+        const sales = yield sale_model_1.default.find(condition).skip(page * salesPerPage).limit(salesPerPage);
         res.json({ data: sales, status: 1 });
     }
     catch (err) {

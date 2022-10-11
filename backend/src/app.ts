@@ -5,6 +5,7 @@ import post_route from './routes/post_route';
 import user_route from './routes/user_route';
 import auth_route from './routes/auth_route';
 import cinema_route from './routes/cinema_route';
+import sale_route from './routes/sale_route';
 import error from './middlewares/error';
 import cors from 'cors';
 import multer, { FileFilterCallback } from 'multer';
@@ -61,6 +62,7 @@ mongoose
     // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     app.listen(PORT, () => console.log("Server running on port "+ PORT));
 
+    app.use('/api/sales', passport.authenticate('jwt', { session: false }), sale_route);
     app.use('/api/cinemas', passport.authenticate('jwt', { session: false }), cinema_route);
     app.use('/api/users', passport.authenticate('jwt', { session: false }), user_route);
     app.use('/api/posts', passport.authenticate('jwt', { session: false }), post_route);
